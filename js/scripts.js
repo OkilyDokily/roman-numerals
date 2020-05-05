@@ -18,13 +18,13 @@ function appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral){
 function decimalToRomanNumeral(multiple){
   var timesToMultipleRomanNumeral = 1;
   var romanNumeralToMultiply;
-  var equivalentsMap = new Map([[1,"I"],[5,"V"],[10,"X"],[50,"L"],[100,"C"],[500,"D"],[1000,"M"]]);
-  var equivalentsMapsKeys = [...equivalentsMap.keys()];
+  var equivalentsMap = new Map([[1,"I"],[5,"V"],[10,"X"],[50,"L"],[100,"C"],[500,"D"],[1000,"M"],[4000,"E"]]);
+  var equivalentsMapKeys = [...equivalentsMap.keys()];
   
-  for(var i = 0; i < equivalentsMapsKeys.length; i++){
-    if(equivalentsMapsKeys[i] > multiple){
-      timesToMultipleRomanNumeral = findAppropriateMultiple(equivalentsMapsKeys[i-1],multiple);
-      romanNumeralToMultiply = equivalentsMap.get(equivalentsMapsKeys[i-1]);
+  for(var i = 0; i < equivalentsMapKeys.length; i++){
+    if((equivalentsMapKeys[i] > multiple)){
+      timesToMultipleRomanNumeral = findAppropriateMultiple(equivalentsMapKeys[i-1],multiple);
+      romanNumeralToMultiply = equivalentsMap.get(equivalentsMapKeys[i-1]);
       break;
     }
   }
@@ -35,5 +35,5 @@ function decimalToRomanNumeral(multiple){
 
 $(document).ready(function(){
 
-  console.log(decimalToRomanNumeral(3000));
+  console.log(decimalToRomanNumeral(4000));
 })
