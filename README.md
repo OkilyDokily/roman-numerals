@@ -36,6 +36,7 @@ _Page converts number into roman numeral_
 | Implemement reiteration (simple) - when the highest equivalent is found subtract that value and then find the highest equivalent for the difference, then merge those findings | 11    | XI     |
 | Implement reiteration (simple) - When the highest multiple is found no more than 3 then subtract that from total and then find highest equivalent, then merge the findings     | 25    | XXV    |
 | Implement reiterations with subtraction - Determine that subtraction gets closer to the highest value than multiplication and then subtract highest value and merge findings   | 45    | XLV    |
+| Handle any complex number   | 1956    | MCMLVI    |
 
 ## Setup/Installation Requirements
 
