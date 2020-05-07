@@ -48,6 +48,7 @@ function decimalToRomanNumeral(decimal){
       }
       else{
         secondSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i-1]);
+        //append lower value to higher value and then reiterate the function;
         return (secondSubtractionRomanNumeral + firstSubtractionRomanNumeral) + decimalToRomanNumeral(decimal - totalSubtractionDecimal);
       }
     }
@@ -66,6 +67,11 @@ $(document).ready(function(){
     console.log(decimalToRomanNumeral(number));
     i++;
   }
+  $("form").submit(function(e){
+    e.preventDefault();
+    var input = $("input").val()
+    $("#result").text(input + " equals " + decimalToRomanNumeral(input) + " in Roman Numerals.");
+  });
 
   
 })
