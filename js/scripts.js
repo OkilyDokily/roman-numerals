@@ -32,8 +32,10 @@ function decimalToRomanNumeral(decimal){
       firstSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i]);
       if (goesDownTwoWhenSubtracted.includes(firstSubtractionRomanNumeral)){
         totalSubtractionDecimal = equivalentsMapKeys[i] - equivalentsMapKeys[i-2];
+        secondSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i-2]);
       }
       else{
+         secondSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i-1]);
          totalSubtractionDecimal = equivalentsMapKeys[i] - equivalentsMapKeys[i-1]; 
       }
       //decide whether to to reiterate using append multiples or appendsubtraction
@@ -47,7 +49,6 @@ function decimalToRomanNumeral(decimal){
         return appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral) + decimalToRomanNumeral(decimal - totalDecimalOfMultiplies);
       }
       else{
-        secondSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i-1]);
         //append lower value to higher value and then reiterate the function;
         return (secondSubtractionRomanNumeral + firstSubtractionRomanNumeral) + decimalToRomanNumeral(decimal - totalSubtractionDecimal);
       }
