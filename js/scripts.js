@@ -10,10 +10,6 @@ function appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral){
   return romanNumeralToMultiply + appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral-1);
 }
 
-function appendSubtraction(first,second){
-  return second + first;
-}
-
 function decimalToRomanNumeral(decimal){
   if (decimal === 0) return "";
   if(decimal >3999) return "thats too high";
@@ -31,6 +27,7 @@ function decimalToRomanNumeral(decimal){
   var firstSubtractionRomanNumeral;
   var secondSubtractionRomanNumeral;
   for(var i = 0; i < equivalentsMapKeys.length; i++){
+    //find first roman numeral which exceeds the value of the decimal 
     if((equivalentsMapKeys[i] > decimal)){
       firstSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i]);
       if (goesDownTwoWhenSubtracted.includes(firstSubtractionRomanNumeral)){
@@ -39,7 +36,9 @@ function decimalToRomanNumeral(decimal){
       else{
          totalSubtractionDecimal = equivalentsMapKeys[i] - equivalentsMapKeys[i-1]; 
       }
-      //decide whether to to reiterate using map or get map
+      //decide whether to to reiterate using append multiples or appendsubtraction
+      //if the current roman numeral subtract the previous roman numeral is greater than the decimal then we need to think in terms 
+      //of multiple roman numerals in a sequence from 1 to 3.
       if(totalSubtractionDecimal > decimal){
         romanNumeralToMultiply = equivalentsMap.get(equivalentsMapKeys[i-1])
         decimalOfRomanNumeralToMultiply = equivalentsMapKeys[i-1]
@@ -49,7 +48,7 @@ function decimalToRomanNumeral(decimal){
       }
       else{
         secondSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i-1]);
-        return appendSubtraction(firstSubtractionRomanNumeral, secondSubtractionRomanNumeral) + decimalToRomanNumeral(decimal - totalSubtractionDecimal);
+        return (secondSubtractionRomanNumeral + firstSubtractionRomanNumeral) + decimalToRomanNumeral(decimal - totalSubtractionDecimal);
       }
     }
   }
