@@ -1,16 +1,12 @@
 
 function findAppropriateMultiple(value,decimal){ 
   for(var i = 1; i <= 4;i++) {
-    if (value * i > decimal){
-      return i - 1;
-    }
+    if (value * i > decimal) return i - 1;
   }
 }
 
 function appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral){
-  if(timesToMultipleRomanNumeral === 0){
-    return "";
-  }
+  if(timesToMultipleRomanNumeral === 0) return "";
   return romanNumeralToMultiply + appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral-1);
 }
 
@@ -19,12 +15,9 @@ function appendSubtraction(first,second){
 }
 
 function decimalToRomanNumeral(decimal){
-  if (decimal === 0){
-    return "";
-  }
-  if(decimal >3999){
-   return "thats too high";
-  }
+  if (decimal === 0) return "";
+  if(decimal >3999) return "thats too high";
+  
   var timesToMultipleRomanNumeral = 1;
   var romanNumeralToMultiply;
   var equivalentsMap = new Map([[1,"I"],[5,"V"],[10,"X"],[50,"L"],[100,"C"],[500,"D"],[1000,"M"],[5000,"E"]]);
@@ -66,6 +59,8 @@ function decimalToRomanNumeral(decimal){
 
 
 $(document).ready(function(){
+  console.log(decimalToRomanNumeral(0));
+  console.log(decimalToRomanNumeral(4000));
   var i = 0;
   while(i < 1000){
     var number = Math.floor((Math.random()*4000));
