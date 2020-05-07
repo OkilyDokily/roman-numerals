@@ -1,16 +1,13 @@
 
-function findAppropriateMultiple(value,decimal){
-  
+function findAppropriateMultiple(value,decimal){ 
   for(var i = 1; i <= 4;i++) {
     if (value * i > decimal){
       return i - 1;
     }
   }
-  
 }
 
 function appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral){
-  
   if(timesToMultipleRomanNumeral === 0){
     return "";
   }
@@ -38,75 +35,44 @@ function decimalToRomanNumeral(decimal){
   var decimalOfRomanNumeralToMultiply;
   var totalDecimalOfMultiplies;
 
-  var subtractionDecimal;
+  var totalSubtractionDecimal;
   var firstSubtractionRomanNumeral;
   var secondSubtractionRomanNumeral;
   for(var i = 0; i < equivalentsMapKeys.length; i++){
     if((equivalentsMapKeys[i] > decimal)){
-      decimalOfRomanNumeralToMultiply = equivalentsMapKeys[i-1];
-
-      timesToMultipleRomanNumeral = findAppropriateMultiple(decimalOfRomanNumeralToMultiply,decimal);
-      totalDecimalOfMultiplies = timesToMultipleRomanNumeral * decimalOfRomanNumeralToMultiply;
-      romanNumeralToMultiply = equivalentsMap.get(equivalentsMapKeys[i-1]);
-      /////
       firstSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i]);
-      
-      if(goesDownTwoWhenSubtracted.includes(firstSubtractionRomanNumeral)){
-        subtractionDecimal = equivalentsMapKeys[i] - equivalentsMapKeys[i-2];
-        secondSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i-2]);
+      if (goesDownTwoWhenSubtracted.includes(firstSubtractionRomanNumeral)){
+        totalSubtractionDecimal = equivalentsMapKeys[i] - equivalentsMapKeys[i-2];
       }
       else{
-        subtractionDecimal = equivalentsMapKeys[i] - equivalentsMapKeys[i-1];
-        secondSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i-1]);
+         totalSubtractionDecimal = equivalentsMapKeys[i] - equivalentsMapKeys[i-1]; 
       }
-      
-      break;
+      //decide whether to to reiterate using map or get map
+      if(totalSubtractionDecimal > decimal){
+        romanNumeralToMultiply = equivalentsMap.get(equivalentsMapKeys[i-1])
+        decimalOfRomanNumeralToMultiply = equivalentsMapKeys[i-1]
+        timesToMultipleRomanNumeral = findAppropriateMultiple(decimalOfRomanNumeralToMultiply,decimal);
+        totalDecimalOfMultiplies = timesToMultipleRomanNumeral * decimalOfRomanNumeralToMultiply;
+        return appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral) + decimalToRomanNumeral(decimal - totalDecimalOfMultiplies);
+      }
+      else{
+        secondSubtractionRomanNumeral = equivalentsMap.get(equivalentsMapKeys[i-1]);
+        return appendSubtraction(firstSubtractionRomanNumeral, secondSubtractionRomanNumeral) + decimalToRomanNumeral(decimal - totalSubtractionDecimal);
+      }
     }
-  }
-  
-  if (subtractionDecimal > decimal){
-    return appendMultiples(romanNumeralToMultiply,timesToMultipleRomanNumeral) + decimalToRomanNumeral(decimal - totalDecimalOfMultiplies);
-  }
-  else {
-    return appendSubtraction(firstSubtractionRomanNumeral,secondSubtractionRomanNumeral) +decimalToRomanNumeral(decimal - subtractionDecimal);
   }
   
 }
 
 
 $(document).ready(function(){
-  console.log(decimalToRomanNumeral(1));
-  console.log(decimalToRomanNumeral(2));
-  console.log(decimalToRomanNumeral(3));
-  console.log(decimalToRomanNumeral(4));
-   console.log(decimalToRomanNumeral(5));
-  console.log(decimalToRomanNumeral(6));
-  console.log(decimalToRomanNumeral(7));
-  console.log(decimalToRomanNumeral(8));
-  console.log(decimalToRomanNumeral(9));
-  console.log(decimalToRomanNumeral(10));
-  console.log(decimalToRomanNumeral(11));
-  console.log(decimalToRomanNumeral(12));
-  console.log(decimalToRomanNumeral(19));
-  console.log(decimalToRomanNumeral(20));
-  console.log(decimalToRomanNumeral(45));
-  console.log(decimalToRomanNumeral(35))
-  console.log(decimalToRomanNumeral(30));
-  console.log(decimalToRomanNumeral(40));
-  console.log(decimalToRomanNumeral(50));
-  console.log(decimalToRomanNumeral(90));
-  console.log(decimalToRomanNumeral(100));
-  console.log(decimalToRomanNumeral(200));
-  console.log(decimalToRomanNumeral(221));
-  console.log(decimalToRomanNumeral(300));
-  console.log(decimalToRomanNumeral(400));
-  console.log(decimalToRomanNumeral(500));
-  console.log(decimalToRomanNumeral(742));
-  console.log(decimalToRomanNumeral(900));
-  console.log(decimalToRomanNumeral(1000));
-  console.log(decimalToRomanNumeral(1956));
-  console.log(decimalToRomanNumeral(2000));
-  console.log(decimalToRomanNumeral(4000));
+  var i = 0;
+  while(i < 1000){
+    var number = Math.floor((Math.random()*4000));
+    console.log(number);
+    console.log(decimalToRomanNumeral(number));
+    i++;
+  }
 
   
 })
