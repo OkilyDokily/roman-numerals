@@ -17,14 +17,13 @@ function appendSubtraction(first,second){
 function decimalToRomanNumeral(decimal){
   if (decimal === 0) return "";
   if(decimal >3999) return "thats too high";
-  
-  var timesToMultipleRomanNumeral = 1;
-  var romanNumeralToMultiply;
+
   var equivalentsMap = new Map([[1,"I"],[5,"V"],[10,"X"],[50,"L"],[100,"C"],[500,"D"],[1000,"M"],[5000,"E"]]);
   var equivalentsMapKeys = [...equivalentsMap.keys()];
   var goesDownTwoWhenSubtracted = ["X","C","M"];
-
-
+  
+  var timesToMultipleRomanNumeral = 1;
+  var romanNumeralToMultiply;
   var decimalOfRomanNumeralToMultiply;
   var totalDecimalOfMultiplies;
 
